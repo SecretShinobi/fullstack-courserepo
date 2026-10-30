@@ -1,8 +1,26 @@
-const AddPerson = ({ person, namelist }) => {
+import { useState } from 'react'
 
+const PersonForm = ({ persons, setPersons }) => {
     const [newName, setNewName] = useState('')
     const [newNumber, setNewNumber] = useState('')
 
+    const addPerson = (event) => {
+        event.preventDefault()
+        const personObject = {
+            name: newName,
+            number: newNumber,
+            id: (persons.length + 1)
+        }
+
+        const names = persons.map(person => person.name === newName)
+        if (names.includes(true)) {
+            alert(`${newName} is already added to phonebook`)
+        } else {
+            setPersons(persons.concat(personObject))
+        }
+        setNewName('')
+        setNewNumber('')
+    }
 
     const handleNameChange = (event) => {
         setNewName(event.target.value)
@@ -27,4 +45,4 @@ const AddPerson = ({ person, namelist }) => {
     )
 }
 
-export default AddPerson
+export default PersonForm

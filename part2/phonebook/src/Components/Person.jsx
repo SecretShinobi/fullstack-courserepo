@@ -1,5 +1,20 @@
 const Person = ({ person }) => {
-    return <li>{person.name} {person.number}</li>
+    return (<div>{person.name} {person.number}</div>)
 }
 
-export default Person
+const Persons = ({ persons, filter }) => {
+
+    const filteredNames = persons.filter(
+        (person) => person.name.toLowerCase().includes(filter.toLowerCase())
+    )
+
+    return (
+        <div>
+            {filteredNames.map((person) =>
+                <Person key={person.id} person={person} />)
+            }
+        </div>
+    )
+}
+
+export default Persons
